@@ -262,3 +262,80 @@ button,
   color: #f87171;
   font-weight: 700
 }
+
+/*RESPONSIVE*/
+/* ======================= */
+/* 📱 Celulares (≤ 768px) */
+/* ======================= */
+@media (max-width: 768px) {
+  .hero .container {
+    grid-template-columns: 1fr;   /* logo debajo del texto */
+    text-align: center;
+  }
+
+  .glass-panel {
+    margin: 1rem auto 0 auto;     /* centra el cuadro */
+    max-width: 260px;
+    min-height: 220px;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+  }
+}
+
+/* ======================== */
+/* 🖥️ Monitores grandes (≥ 1200px) */
+/* ======================== */
+@media (min-width: 1200px) {
+  .hero h1 {
+    font-size: clamp(2.2rem, 3vw, 3.5rem);
+  }
+
+  .glass-panel {
+    max-width: 420px;
+    min-height: 360px;
+  }
+}
+
+/* ======================== */
+/* 📺 Televisores grandes (≥ 1920px) */
+/* ======================== */
+@media (min-width: 1920px) {
+  .hero .container {
+    gap: 2rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 3.5vw, 4rem);
+  }
+
+  .glass-panel {
+    max-width: 500px;
+    min-height: 400px;
+  }
+}
+
+
+/* ========================== */
+/* 📱 Responsive para grids   */
+/* ========================== */
+
+/* 🖥️ Desktop grande (por defecto) → 3 columnas */
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* 📱 Tablets medianas (≤ 960px) → 2 columnas */
+@media (max-width: 960px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 📱 Celulares (≤ 640px) → 1 columna */
+@media (max-width: 640px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}

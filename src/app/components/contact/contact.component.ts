@@ -52,9 +52,10 @@ import { CommonModule } from '@angular/common';
 export class ContactComponent {
   private fb = new FormBuilder();
   ok = false; copiado = false; readonly destinatario = 'wmc.peru.2025@gmail.com';
-  form = this.fb.group({ nombre:['',[Validators.required,Validators.minLength(2)]], correo:['',[Validators.required,Validators.email]], asunto:['',[Validators.required,Validators.minLength(3)]], mensaje:['',[Validators.required,Validators.minLength(10)]] });
-  get gmailComposeUrl(){ const {asunto,mensaje,nombre,correo}=this.form.value; const subject=`[IPDP] ${asunto||''} — ${nombre||''}`.trim(); const body=`Nombre: ${nombre||''}\nCorreo: ${correo||''}\n\n${mensaje||''}`; const params=new URLSearchParams({view:'cm',to:this.destinatario,su:subject,body}); return 'https://mail.google.com/mail/?'+params.toString(); }
-  enviar(){ if(this.form.invalid) return; const {asunto,mensaje,nombre,correo}=this.form.value; const subject=`[IPDP] ${asunto} — ${nombre}`; const body=`Nombre: ${nombre}\nCorreo: ${correo}\n\n${mensaje}`; const link=`mailto:${this.destinatario}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; window.location.href=link; this.ok=true; setTimeout(()=>this.ok=false,4000); }
-  async copiar(){ const {asunto,mensaje,nombre,correo}=this.form.value; const text=`[${asunto}] ${nombre} <${correo}>\n\n${mensaje}`; try{ await navigator.clipboard.writeText(text); this.copiado=true; setTimeout(()=>this.copiado=false,2500);}catch{}
-}
+  form = this.fb.group({ nombre: ['', [Validators.required, Validators.minLength(2)]], correo: ['', [Validators.required, Validators.email]], asunto: ['', [Validators.required, Validators.minLength(3)]], mensaje: ['', [Validators.required, Validators.minLength(10)]] });
+  get gmailComposeUrl() { const { asunto, mensaje, nombre, correo } = this.form.value; const subject = `[IPDP] ${asunto || ''} — ${nombre || ''}`.trim(); const body = `Nombre: ${nombre || ''}\nCorreo: ${correo || ''}\n\n${mensaje || ''}`; const params = new URLSearchParams({ view: 'cm', to: this.destinatario, su: subject, body }); return 'https://mail.google.com/mail/?' + params.toString(); }
+  enviar() { if (this.form.invalid) return; const { asunto, mensaje, nombre, correo } = this.form.value; const subject = `[IPDP] ${asunto} — ${nombre}`; const body = `Nombre: ${nombre}\nCorreo: ${correo}\n\n${mensaje}`; const link = `mailto:${this.destinatario}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; window.location.href = link; this.ok = true; setTimeout(() => this.ok = false, 4000); }
+  async copiar() {
+    const { asunto, mensaje, nombre, correo } = this.form.value; const text = `[${asunto}] ${nombre} <${correo}>\n\n${mensaje}`; try { await navigator.clipboard.writeText(text); this.copiado = true; setTimeout(() => this.copiado = false, 2500); } catch { }
+  }
 }
